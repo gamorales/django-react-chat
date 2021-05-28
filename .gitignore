@@ -1,0 +1,37 @@
+# Local configuration
+venv/
+local_settings.py
+.git/
+.env
+ipython_config/
+
+# Compiled Python files
+*.py[cod]
+
+# Package management
+node_modules/
+python_packages/
+
+# Test output
+.pytest_cache/
+.coverage
+summary.json
+html_reports
+
+# SQLite db files
+ebdb
+ebdb_dev
+*.sqlite*
+
+# Emacs temporary files
+*~
+.#*
+\#*\#
+
+# vi temporary files
+*.sw[pon]
+
+# PyDev
+.pydevproject
+.project
+.settings

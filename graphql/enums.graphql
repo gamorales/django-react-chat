@@ -1,0 +1,12 @@
+type Profesor {
+  nombre: String!
+  apellidos: String!
+  experiencia: Int
+  curso: [String]!
+}
+
+enum Cursos {
+  GRAPHQL_DE_CERO
+  NPM
+  COMPODOC
+}

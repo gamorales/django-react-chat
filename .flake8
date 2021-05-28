@@ -1,0 +1,15 @@
+[flake8]
+application-import-names = newsela
+exclude =
+    .git,
+    __pycache__,
+    migrations,
+    settings.py
+ignore =
+  # flake8 is too strict, black disagrees.
+  W503, W504
+  # Black disagrees.
+  E203
+  # Let developers use whatever variable names they want
+  E741
+max-line-length = 89
