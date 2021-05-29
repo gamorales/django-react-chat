@@ -13,7 +13,6 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 
 const ChatList = ({ classes, rooms }) => (
-
     <List>
       { rooms.map(room => (
           <ExpansionPanel key={room.id}>
