@@ -1,0 +1,62 @@
+[
+{
+    "model": "chats.room",
+    "pk": 1,
+    "fields": {
+        "name": "Anime",
+        "description": "In this room you can talk about anime.",
+        "created_at": "2021-05-29T18:08:56.562Z",
+        "updated_at": "2021-05-29T18:17:43.076Z"
+    }
+},
+{
+    "model": "chats.room",
+    "pk": 2,
+    "fields": {
+        "name": "Manga",
+        "description": "In this room you can talk about manga.",
+        "created_at": "2021-05-29T18:09:00.268Z",
+        "updated_at": "2021-05-29T18:18:20.266Z"
+    }
+},
+{
+    "model": "chats.room",
+    "pk": 3,
+    "fields": {
+        "name": "Comics",
+        "description": "In this room you can talk about comics.",
+        "created_at": "2021-05-29T18:09:02.899Z",
+        "updated_at": "2021-05-29T18:18:14.019Z"
+    }
+},
+{
+    "model": "chats.room",
+    "pk": 4,
+    "fields": {
+        "name": "Cartoons",
+        "description": "In this room you can talk about cartoons.",
+        "created_at": "2021-05-29T18:09:06.391Z",
+        "updated_at": "2021-05-29T18:18:08.545Z"
+    }
+},
+{
+    "model": "chats.room",
+    "pk": 5,
+    "fields": {
+        "name": "Programming",
+        "description": "In this room you can talk about programming.",
+        "created_at": "2021-05-29T18:09:10.509Z",
+        "updated_at": "2021-05-29T18:18:02.469Z"
+    }
+},
+{
+    "model": "chats.room",
+    "pk": 6,
+    "fields": {
+        "name": "Friendship",
+        "description": "In this room you can talk about friendship.",
+        "created_at": "2021-05-29T18:09:24.231Z",
+        "updated_at": "2021-05-29T18:17:51.285Z"
+    }
+}
+]
