@@ -2,10 +2,11 @@ import graphene
 import graphql_jwt
 
 import apps.users.schema as users
+import apps.chats.schema as chats
 import apps.tracks.schema as tracks
 
 
-class Query(users.Query, tracks.Query, graphene.ObjectType):
+class Query(users.Query, tracks.Query, chats.Query, graphene.ObjectType):
     pass
 
 

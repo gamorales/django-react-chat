@@ -47,10 +47,12 @@ DJANGO_APPS = [
 ]
 
 LOCAL_APPS = [
+    "apps.chats",
     "apps.tracks",
 ]
 
 THIRD_PARTY_APPS = [
+    "channels",  # Websockets
     "graphene_django",  # GraphQL library
     "corsheaders",  # Add CORS headers to responses
 ]
@@ -89,7 +91,16 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "graphqlprj.wsgi.application"
+ASGI_APPLICATION = "graphqlprj.asgi.application"
 
+# CHANNEL_LAYERS = {
+#     'default': {
+#         'BACKEND': 'channels_redis.core.RedisChannelLayer',
+#         'CONFIG': {
+#             "hosts": [('127.0.0.1', 6379)],
+#         },
+#     },
+# }
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
