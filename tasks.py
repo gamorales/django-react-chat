@@ -2,6 +2,15 @@ from invoke import task
 
 
 @task
+def create_superuser(ctx):
+    """Creates the superuser account 'admin' with password 'admin'."""
+    ctx.run("""echo "from django.contrib.auth.models import User;  
+User.objects.create_superuser('admin', 'admin@example.com', 'admin')" | 
+python manage.py shell""")
+    print("superuser created admin:admin")
+
+
+@task
 def makemigrations(ctx, merge=False):
     """Creates new migrations based on any model changes.
 
@@ -27,6 +36,12 @@ def migrate(ctx):
 
 
 @task
+def create_rooms(ctx):
+    """Creates default rooms for testing."""
+    ctx.run("python3 manage.py loaddata apps/chats/fixtures/rooms.json")
+
+
+@task
 def run(ctx):
     """Runs the monolith."""
     ctx.run("python3 manage.py runserver")
@@ -41,7 +56,7 @@ def shell(ctx):
 @task
 def flake8(ctx, cmd=None):
     """Runs flake8 to ensure Python code matches our style guide."""
-    excluded_paths = ",".join(["site-packages", "migrations", "settings.py"])
+    excluded_paths = ",".join(["site-packages", "migrations", "settings.py", "sdfad"])
     ctx.run(
         f"flake8 . --exclude={excluded_paths}",
     )
@@ -56,3 +71,9 @@ def black(ctx, check=False):
         command.append("--check")
     command.append(".")
     ctx.run(" ".join(command))
+
+
+@task
+def frontend(ctx):
+    """Runs the frontend react app."""
+    ctx.run("cd ./sdfad && yarn start")
