@@ -65,6 +65,7 @@ const SEARCH_ROOMS_QUERY = gql `
             id
             name
             description
+            quantity
             createdAt
         }
   }

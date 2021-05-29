@@ -35,6 +35,7 @@ export const GET_ROOMS_QUERY = gql`
             id
             name
             description
+            quantity
             createdAt
         }
     }

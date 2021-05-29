@@ -9,6 +9,7 @@ class Room(models.Model):
     description = models.TextField(default="Room")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    quantity = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name

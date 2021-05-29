@@ -6,7 +6,8 @@
         "name": "Anime",
         "description": "In this room you can talk about anime.",
         "created_at": "2021-05-29T18:08:56.562Z",
-        "updated_at": "2021-05-29T18:17:43.076Z"
+        "updated_at": "2021-05-29T18:17:43.076Z",
+        "quantity": 0
     }
 },
 {
@@ -16,7 +17,8 @@
         "name": "Manga",
         "description": "In this room you can talk about manga.",
         "created_at": "2021-05-29T18:09:00.268Z",
-        "updated_at": "2021-05-29T18:18:20.266Z"
+        "updated_at": "2021-05-29T18:18:20.266Z",
+        "quantity": 0
     }
 },
 {
@@ -26,7 +28,8 @@
         "name": "Comics",
         "description": "In this room you can talk about comics.",
         "created_at": "2021-05-29T18:09:02.899Z",
-        "updated_at": "2021-05-29T18:18:14.019Z"
+        "updated_at": "2021-05-29T18:18:14.019Z",
+        "quantity": 0
     }
 },
 {
@@ -36,7 +39,8 @@
         "name": "Cartoons",
         "description": "In this room you can talk about cartoons.",
         "created_at": "2021-05-29T18:09:06.391Z",
-        "updated_at": "2021-05-29T18:18:08.545Z"
+        "updated_at": "2021-05-29T18:18:08.545Z",
+        "quantity": 0
     }
 },
 {
@@ -46,7 +50,8 @@
         "name": "Programming",
         "description": "In this room you can talk about programming.",
         "created_at": "2021-05-29T18:09:10.509Z",
-        "updated_at": "2021-05-29T18:18:02.469Z"
+        "updated_at": "2021-05-29T18:18:02.469Z",
+        "quantity": 0
     }
 },
 {
@@ -56,7 +61,8 @@
         "name": "Friendship",
         "description": "In this room you can talk about friendship.",
         "created_at": "2021-05-29T18:09:24.231Z",
-        "updated_at": "2021-05-29T18:17:51.285Z"
+        "updated_at": "2021-05-29T18:17:51.285Z",
+        "quantity": 0
     }
 }
 ]
