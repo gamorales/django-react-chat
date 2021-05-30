@@ -4,6 +4,7 @@ Chat Python Challenge
 ## Requirements for the project
 1. Python 3.6+
 2. NodeJS 15.11
+3. Redis
 
 ## Python mandatory dependencies
 We need to create a Virtual Environment
