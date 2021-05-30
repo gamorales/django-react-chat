@@ -6,6 +6,13 @@ Chat Python Challenge
 2. NodeJS 15.11
 3. Redis
 
+## Check Redis
+After install redis, check if is active,
+
+`redis-cli ping`
+
+the response must be "PONG".
+
 ## Python mandatory dependencies
 We need to create a Virtual Environment
 
