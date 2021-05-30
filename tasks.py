@@ -4,8 +4,8 @@ from invoke import task
 @task
 def create_superuser(ctx):
     """Creates the superuser account 'admin' with password 'admin'."""
-    ctx.run("""echo "from django.contrib.auth.models import User;  
-User.objects.create_superuser('admin', 'admin@example.com', 'admin')" | 
+    ctx.run("""echo "from django.contrib.auth.models import User;
+User.objects.create_superuser('admin', 'admin@example.com', 'admin')" |
 python manage.py shell""")
     print("superuser created admin:admin")
 
@@ -74,6 +74,12 @@ def black(ctx, check=False):
 
 
 @task
-def frontend(ctx):
+def frontend_start(ctx):
     """Runs the frontend react app."""
-    ctx.run("cd ./sdfad && yarn start")
+    ctx.run("cd ./react_chat && yarn start")
+
+
+@task
+def frontend_install(ctx):
+    """Install all frontend dependencies."""
+    ctx.run("cd ./react_chat && yarn install")
