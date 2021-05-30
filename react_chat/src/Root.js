@@ -7,6 +7,7 @@ import withRoot from "./withRoot";
 import Header from "./components/Shared/Header"
 import App from "./pages/App"
 import Profile from "./pages/Profile"
+import ChatWindow from "./components/Chat/ChatWindow";
 import Loading from "./components/Shared/Loading";
 import Error from "./components/Shared/Error";
 
@@ -25,6 +26,7 @@ const Root = () => (
                     <Switch>
                         <Route exact path="/" component={App} />
                         <Route path="/profile/:id" component={Profile} />
+                        <Route path="/chat/:name/:id/room" component={ChatWindow} />
                     </Switch>
                 </>
             </Router>

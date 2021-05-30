@@ -1,19 +1,24 @@
 import React from "react";
+import { Link } from "react-router-dom"
 import { Mutation } from "react-apollo";
 import { gql } from "apollo-boost"
 
 import withStyles from "@material-ui/core/styles/withStyles";
 import IconButton from "@material-ui/core/IconButton";
-import SendIcon from '@material-ui/icons/Send';
+import TextsmsIcon from '@material-ui/icons/Textsms';
 
-const EnterChat = ({ classes, roomId, usersCount }) => {
+const EnterChat = ({ classes, roomName, roomId, usersCount }) => {
   return (
-      <IconButton onClick={event => {
-        event.stopPropagation()
-        }} className={classes.iconButton}>
-          { usersCount }
-          <SendIcon className={classes.icon} />
-      </IconButton>
+      <Link to={`/chat/${roomName}/${roomId}/room`}>
+        <IconButton
+            onClick={event => {event.stopPropagation()}}
+            className={classes.iconButton}
+        >
+            { usersCount }
+            <TextsmsIcon className={classes.icon} />
+        </IconButton>
+      </Link>
+
   );
 };
 

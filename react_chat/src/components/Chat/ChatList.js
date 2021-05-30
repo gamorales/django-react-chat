@@ -19,7 +19,7 @@ const ChatList = ({ classes, rooms }) => (
           <ExpansionPanel key={room.id}>
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
               <ListItem className={classes.root}>
-                <EnterChat roomId={room.id} usersCount={room.quantity} />
+                <EnterChat roomName={room.name} roomId={room.id} usersCount={room.quantity} />
                 <ListItemText
                     primaryTypographyProps={{
                       variant: "subheading",
@@ -27,7 +27,6 @@ const ChatList = ({ classes, rooms }) => (
                     }}
                     primary={room.name} secondary={room.description}>
                 </ListItemText>
-                <div>Description</div>
               </ListItem>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails className={classes.details}>
