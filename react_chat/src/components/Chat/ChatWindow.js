@@ -33,6 +33,16 @@ const ChatWindow = ({ classes }) => {
         { id:20, message: 'How are you?', user: 'Admin' },
 
     ];
+    const roomName = window.location.pathname.split("/")[2];
+    const roomId = window.location.pathname.split("/")[3];
+
+    const chatSocket = new WebSocket(
+        'ws://'
+        + window.location.host.replace("3000", "8000")
+        + `/ws/chats/${roomName}/${roomId}/`
+    );
+
+    console.log(chatSocket)
 
     const handleSubmit = (event) => {
         event.preventDefault();
