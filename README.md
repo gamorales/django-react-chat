@@ -5,6 +5,7 @@ Chat Python Challenge
 1. Python 3.6+
 2. NodeJS 15.11
 3. Redis
+4. Chromedriver for selenium testing (https://chromedriver.chromium.org/)
 
 ## Check Redis
 After install redis, check if is active,
@@ -33,6 +34,7 @@ This will install:
 9. Factory boy
 10. Flake8
 11. Black
+12. Selenium
 
 ## Nodejs mandatory dependencies
 ### Install Yarn
