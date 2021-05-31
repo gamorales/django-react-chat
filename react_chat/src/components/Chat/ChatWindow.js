@@ -1,9 +1,11 @@
 import React, {useRef, useState} from "react";
+
 import { Query } from "react-apollo"
 import { gql } from "apollo-boost"
 
 import withStyles from "@material-ui/core/styles/withStyles";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import ReconnectingWebSocket from "reconnecting-websocket";
 
 import ChatMessageHistory from "./ChatMessageHistory";
 import TextField from "@material-ui/core/TextField";
@@ -22,18 +24,18 @@ const ChatWindow = ({ classes }) => {
 
     const [message, setMessage] = useState("")
 
-    const chatSocket = new WebSocket(
+    const chatSocket = new ReconnectingWebSocket(
         'ws://'
         + window.location.host.replace("3000", "8000")
         + `/ws/chats/${roomName}/${roomId}/`
-    );
-    chatSocket.onmessage = function(e) {
-        const data = JSON.parse(e.data);
-        console.log(data.message);
-    };
-    chatSocket.onclose = function(e) {
-        console.error('Chat socket closed unexpectedly');
-    };
+    )
+    chatSocket.onmessage = (event) => {
+        const data = JSON.parse(event.data)
+        console.log(data)
+    }
+    chatSocket.onclose = (event) => {
+        console.error(`Chat socked closed unexpectedly. ${event}`)
+    }
 
     const scrollCard = () => {
         document.querySelector('#maincard').scrollTo({
