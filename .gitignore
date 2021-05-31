@@ -35,3 +35,6 @@ ebdb_dev
 .pydevproject
 .project
 .settings
+
+# Drivers
+chromedriver
