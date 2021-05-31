@@ -58,6 +58,7 @@ const Login = ({ classes, setNewUser }) => {
                                   <Input id="password" type="password" onChange={event => setPassword(event.target.value)} />
                               </FormControl>
                               <Button
+								  id="login"
                                   type="submit"
                                   disabled={loading || !username.trim() || !password.trim()}
                                   className={classes.submit}

@@ -88,7 +88,11 @@ const Register = ({ classes, setNewUser }) => {
                                 color="secondary">
                                 { loading ? "Registering..." : "Register"}
                             </Button>
-                            <Button fullWidth variant="outlined" color="primary" onClick={() => setNewUser(false)}>
+                            <Button
+								id="login-register"
+								fullWidth variant="outlined" 
+								color="primary" 
+								onClick={() => setNewUser(false)}>
                                 Login
                             </Button>
 

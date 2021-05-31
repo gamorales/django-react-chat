@@ -9,6 +9,7 @@ const EnterChat = ({ classes, roomName, roomId, usersCount }) => {
   return (
       <Link to={`/chat/${roomName}/${roomId}/room`}>
         <IconButton
+			id={`room-${roomName}`}
             onClick={event => {event.stopPropagation()}}
             className={classes.iconButton}
         >

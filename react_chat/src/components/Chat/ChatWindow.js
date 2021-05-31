@@ -117,6 +117,7 @@ const ChatWindow = ({ classes }) => {
                              <form onSubmit={event => handleSubmit(event)}>
                                 <Paper className={classes.root} elevation={1}>
                                     <TextField
+										id="text-message"
                                         fullWidth placeholder="Enter message..."
                                         InputProps={{disableUnderline: true}}
                                         onChange={event => setMessage(event.target.value)}
