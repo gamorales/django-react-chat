@@ -46,6 +46,12 @@ or
 `invoke frontend-install`
 
 ## After install
+### Configure .env file for CORS
+`ALLOWED_HOSTS_CORS=http://localhost:3000`
+
+### Migrate tables
+`inv migrate`
+
 ### Create superuser
 `invoke create-superuser`
 
