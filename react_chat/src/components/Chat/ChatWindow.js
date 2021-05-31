@@ -1,4 +1,4 @@
-import React, {useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 
 import { Query } from "react-apollo"
 import { gql } from "apollo-boost"
@@ -16,33 +16,68 @@ import Loading from "../Shared/Loading";
 import Error from "../Shared/Error";
 import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
+import format from "date-fns/format";
 
 const ChatWindow = ({ classes }) => {
     const roomName = window.location.pathname.split("/")[2];
     const roomId = window.location.pathname.split("/")[3];
     const inputEl = useRef()
 
-    const [message, setMessage] = useState("")
-
     const chatSocket = new ReconnectingWebSocket(
         'ws://'
         + window.location.host.replace("3000", "8000")
         + `/ws/chats/${roomName}/${roomId}/`
     )
-    chatSocket.onmessage = (event) => {
-        const data = JSON.parse(event.data)
-        console.log(data)
-    }
-    chatSocket.onclose = (event) => {
-        console.error(`Chat socked closed unexpectedly. ${event}`)
-    }
 
+    useEffect(() => {
+        chatSocket.onmessage = (event) => {
+            const data = JSON.parse(event.data)
+            console.log(data)
+
+            const timeSend = format(data.time, "MMM Do, YYYY H:mm:ss")
+            addNode(data.message, data.user, timeSend)
+        }
+        chatSocket.onclose = (event) => {
+            console.error(`Chat socked closed unexpectedly. ${event}`)
+        }
+    }, [])
+
+    const [message, setMessage] = useState("")
+
+    /**
+     * Automatic scroll to the bottom of the chat list
+     */
     const scrollCard = () => {
         document.querySelector('#maincard').scrollTo({
             top:  document.querySelector('#maincard').scrollHeight,
             behavior: "smooth"
         })
     };
+
+    /**
+     * Adds a new node to the main chat list
+     *
+     * @param message
+     * @param user
+     * @param timeSend
+     */
+    const addNode = (message, user, timeSend) => {
+        const ul = document.querySelector("#chat-list")
+        const li = document.createElement("li")
+        const p = document.createElement("p")
+        const br = document.createElement("br")
+        const small = document.createElement("small")
+        small.appendChild(document.createTextNode(timeSend))
+        p.setAttribute("style", "margin-bottom: 0px;")
+        p.appendChild(document.createTextNode(message))
+        p.appendChild(br)
+        p.appendChild(small)
+        li.setAttribute("class", "ChatMessageHistory-liStyles-162")
+        li.setAttribute("style", "background-color: #ADD8E6;")
+        li.appendChild(p)
+        ul.appendChild(li)
+        scrollCard()
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -54,7 +89,6 @@ const ChatWindow = ({ classes }) => {
 
         setMessage("")
         inputEl.current.focus()
-        scrollCard()
     }
 
     return (
@@ -100,7 +134,7 @@ const ChatWindow = ({ classes }) => {
                  </div>
              </div>
          </div>
-      )
+    )
 }
 
 export const GET_MESSAGES_QUERY = gql`

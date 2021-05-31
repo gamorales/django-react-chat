@@ -9,7 +9,7 @@ const ChatMessage = ({ messageData }) => {
              {format(
                   messageData.timeSend,
                   "MMM Do, YYYY H:mm:ss"
-             )} by <strong>{messageData.user.username}</strong>
+             )}
          </small>
       </p>
    )

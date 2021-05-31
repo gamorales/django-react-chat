@@ -5,7 +5,7 @@ import ChatMessage from "./ChatMessage";
 
 const ChatMessageHistory = ({ classes, messages }) => {
     return (
-        <ul className={classes.ulStyles}>
+        <ul id="chat-list" className={classes.ulStyles}>
             { messages.map((message, index) => (
                 <li key={message.id} className={classes.liStyles}
                     style={{ backgroundColor: ( index % 2 === 1 ) ? '#ADD8E6' : '#87CEFA', }}>
