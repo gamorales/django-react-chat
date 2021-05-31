@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useRef, useState} from "react";
 import { Query } from "react-apollo"
 import { gql } from "apollo-boost"
 
@@ -18,28 +18,42 @@ import Typography from "@material-ui/core/Typography";
 const ChatWindow = ({ classes }) => {
     const roomName = window.location.pathname.split("/")[2];
     const roomId = window.location.pathname.split("/")[3];
+    const inputEl = useRef()
+
+    const [message, setMessage] = useState("")
 
     const chatSocket = new WebSocket(
         'ws://'
         + window.location.host.replace("3000", "8000")
         + `/ws/chats/${roomName}/${roomId}/`
     );
+    chatSocket.onmessage = function(e) {
+        const data = JSON.parse(e.data);
+        console.log(data.message);
+    };
+    chatSocket.onclose = function(e) {
+        console.error('Chat socket closed unexpectedly');
+    };
 
-    //console.log(chatSocket)
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const nextMessages = this.state.messages.concat([{ message: this.state.inputText, timestamp: 'Thursday' }]);
-        const nextInputText = '';
-        //this.setState({ messages: nextMessages, inputText: nextInputText });
-    }
-
-    const scrollToTop = () => {
+    const scrollCard = () => {
         document.querySelector('#maincard').scrollTo({
             top:  document.querySelector('#maincard').scrollHeight,
             behavior: "smooth"
         })
     };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(message)
+        chatSocket.send(JSON.stringify({
+            'message': message,
+            'user': document.querySelector('#user').innerHTML
+        }));
+
+        setMessage("")
+        inputEl.current.focus()
+        scrollCard()
+    }
 
     return (
          <div className="container-fluid h-100">
@@ -69,8 +83,12 @@ const ChatWindow = ({ classes }) => {
                                     <TextField
                                         fullWidth placeholder="Enter message..."
                                         InputProps={{disableUnderline: true}}
+                                        onChange={event => setMessage(event.target.value)}
+                                        value={message} inputRef={inputEl}
                                     />
-                                    <IconButton type="submit">
+                                    <IconButton
+                                        disabled={ !message.trim() }
+                                        type="submit">
                                       <SendIcon />
                                     </IconButton>
                                 </Paper>

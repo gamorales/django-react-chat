@@ -115,7 +115,7 @@ const CreateTrack = ({ classes }) => {
                             </form>
                       </Dialog>
                 )
-          }}
+            }}
         </Mutation>
 
       </>

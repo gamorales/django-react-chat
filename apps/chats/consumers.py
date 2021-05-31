@@ -1,4 +1,6 @@
 import json
+
+from django.contrib.auth.models import User
 from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
 from django.utils import timezone, dateformat
@@ -34,9 +36,10 @@ class ChatConsumer(AsyncWebsocketConsumer):
     async def receive(self, text_data):
         text_data_json = json.loads(text_data)
         message = text_data_json['message']
+        user = text_data_json['user']
 
-        # TODO: Save message
-        # await self.save_message(message)
+        # Save message
+        await self.save_message(message, user)
 
         # Send message to room group
         await self.channel_layer.group_send(
@@ -61,3 +64,15 @@ class ChatConsumer(AsyncWebsocketConsumer):
     def get_messages(self, quantity):
         self.messages = Message.objects.filter(room=self.room_id)[:quantity]
         return self.messages
+
+    @database_sync_to_async
+    def save_message(self, message, username):
+        user = User.objects.filter(username__exact=username).first()
+
+        return Message.objects.create(
+            room_id=self.room_id,
+            user_id=user.id,
+            message=message,
+            command=False,
+            time_send=dateformat.format(timezone.now(), "Y-m-d H:i:s")
+        )
