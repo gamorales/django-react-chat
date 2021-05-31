@@ -47,6 +47,6 @@ class Query(graphene.ObjectType):
 
     def resolve_messages(self, info, room=None):
         if room:
-            return Message.objects.filter(room=room)[0:50]
+            return Message.objects.filter(room=room).order_by("-time_send")[0:50]
 
         return Message.objects.all()
