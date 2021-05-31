@@ -10,4 +10,5 @@ def user_record_owner(exc, *args, **kwargs):
             func(*func_args, **func_kwargs)
 
         return wrapper
+
     return inner_func

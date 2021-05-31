@@ -3,14 +3,13 @@ import graphql_jwt
 
 import apps.users.schema as users
 import apps.chats.schema as chats
-import apps.tracks.schema as tracks
 
 
-class Query(users.Query, tracks.Query, chats.Query, graphene.ObjectType):
+class Query(users.Query, chats.Query, graphene.ObjectType):
     pass
 
 
-class Mutation(users.Mutation, tracks.Mutation, graphene.ObjectType):
+class Mutation(users.Mutation, graphene.ObjectType):
     """
     Example:
 

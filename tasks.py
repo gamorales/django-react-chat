@@ -4,9 +4,11 @@ from invoke import task
 @task
 def create_superuser(ctx):
     """Creates the superuser account 'admin' with password 'admin'."""
-    ctx.run("""echo "from django.contrib.auth.models import User;
+    ctx.run(
+        """echo "from django.contrib.auth.models import User;
 User.objects.create_superuser('admin', 'admin@example.com', 'admin')" |
-python manage.py shell""")
+python manage.py shell"""
+    )
     print("superuser created admin:admin")
 
 

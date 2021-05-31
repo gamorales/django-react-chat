@@ -41,12 +41,15 @@ class Query(graphene.ObjectType):
             }
         """
         if search:
-            return Room.objects.filter(name__icontains=search)
+            filter = Q(name__icontains=search) | Q(description__icontains=search)
+            return Room.objects.filter(filter)
 
         return Room.objects.all()
 
     def resolve_messages(self, info, room=None):
         if room:
-            return reversed(Message.objects.filter(room=room).order_by("-time_send")[:50])
+            return reversed(
+                Message.objects.filter(room=room).order_by("-time_send")[:50]
+            )
 
         return Message.objects.all()

@@ -14,13 +14,13 @@ from channels.routing import ProtocolTypeRouter, URLRouter
 
 import apps.chats.routing
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'graphqlprj.settings')
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "graphqlprj.settings")
 
-application = ProtocolTypeRouter({
-    "http": get_asgi_application(),
-    "websocket": AuthMiddlewareStack(
-            URLRouter(
-                apps.chats.routing.websocket_urlpatterns
-            )
+application = ProtocolTypeRouter(
+    {
+        "http": get_asgi_application(),
+        "websocket": AuthMiddlewareStack(
+            URLRouter(apps.chats.routing.websocket_urlpatterns)
         ),
-})
+    }
+)
