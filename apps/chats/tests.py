@@ -15,13 +15,12 @@ class ChatTest(ChannelsLiveServerTestCase):
         self.password = "admin"
         self.email = "goku@dragonball.com"
         User.objects.create_user(
-            username=self.username,
-            email=self.email,
-            password=self.password
+            username=self.username, email=self.email, password=self.password
         )
 
-        chromedriver = \
+        chromedriver = (
             "/home/radicaled/Documentos/desarrollo/python/bigdata/chromedriver"
+        )
         os.environ["webdriver.chrome.driver"] = chromedriver
         url = "http://localhost:3000/"
         self.driver = webdriver.Chrome(executable_path=chromedriver)
@@ -56,7 +55,7 @@ class RoomTestCase(GraphQLTestCase):
 
     def test_list_all_rooms(self):
         response = self.query(
-            '''
+            """
             query rooms{
               rooms{
                 id
@@ -64,19 +63,19 @@ class RoomTestCase(GraphQLTestCase):
                 description
               }
             }
-            ''',
-            op_name='rooms'
+            """,
+            op_name="rooms",
         )
 
         content = json.loads(response.content)
 
-        self.assertEqual(6, len(content['data']['rooms']))
+        self.assertEqual(6, len(content["data"]["rooms"]))
         self.assertEqual(response.status_code, 200)
         self.assertResponseNoErrors(response)
 
     def test_search_room(self):
         response = self.query(
-            '''
+            """
             query rooms($search: String){
               rooms (search: $search){
                 id
@@ -84,13 +83,13 @@ class RoomTestCase(GraphQLTestCase):
                 description
               }
             }
-            ''',
-            op_name='rooms',
-            variables={'search': 'Anime'}
+            """,
+            op_name="rooms",
+            variables={"search": "Anime"},
         )
 
         content = json.loads(response.content)
 
-        self.assertEqual(1, len(content['data']['rooms']))
+        self.assertEqual(1, len(content["data"]["rooms"]))
         self.assertEqual(response.status_code, 200)
         self.assertResponseNoErrors(response)
