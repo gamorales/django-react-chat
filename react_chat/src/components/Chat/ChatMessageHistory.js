@@ -9,7 +9,7 @@ const ChatMessageHistory = ({ classes, messages }) => {
             { messages.map((message, index) => (
                 <li key={message.id} className={classes.liStyles}
                     style={{ backgroundColor: ( index % 2 === 1 ) ? '#ADD8E6' : '#87CEFA', }}>
-                    <ChatMessage message={message.message} user={message.user} />
+                    <ChatMessage message={message.message} user={message.user.username} />
                 </li>
             ))}
         </ul>

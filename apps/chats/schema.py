@@ -3,7 +3,7 @@ from django.db.models import Q
 import graphene
 from graphene_django import DjangoObjectType
 
-from .models import Room
+from .models import Room, Message
 
 
 class RoomType(DjangoObjectType):
@@ -11,8 +11,14 @@ class RoomType(DjangoObjectType):
         model = Room
 
 
+class MessageType(DjangoObjectType):
+    class Meta:
+        model = Message
+
+
 class Query(graphene.ObjectType):
     rooms = graphene.List(RoomType, search=graphene.String())
+    messages = graphene.List(MessageType, room=graphene.Int())
 
     def resolve_rooms(self, info, search=None):
         """
@@ -38,3 +44,9 @@ class Query(graphene.ObjectType):
             return Room.objects.filter(name__icontains=search)
 
         return Room.objects.all()
+
+    def resolve_messages(self, info, room=None):
+        if room:
+            return Message.objects.filter(room=room)[0:50]
+
+        return Message.objects.all()
