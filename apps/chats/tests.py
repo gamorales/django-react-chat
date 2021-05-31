@@ -1,6 +1,8 @@
 import os
 import time
+import json
 
+from graphene_django.utils.testing import GraphQLTestCase
 from django.contrib.auth.models import User
 from channels.testing import ChannelsLiveServerTestCase
 from selenium import webdriver
@@ -48,3 +50,47 @@ class ChatTest(ChannelsLiveServerTestCase):
         login = self.driver.find_element_by_id("login")
         login.click()
 
+
+class RoomTestCase(GraphQLTestCase):
+    fixtures = ["rooms.json"]
+
+    def test_list_all_rooms(self):
+        response = self.query(
+            '''
+            query rooms{
+              rooms{
+                id
+                name
+                description
+              }
+            }
+            ''',
+            op_name='rooms'
+        )
+
+        content = json.loads(response.content)
+
+        self.assertEqual(6, len(content['data']['rooms']))
+        self.assertEqual(response.status_code, 200)
+        self.assertResponseNoErrors(response)
+
+    def test_search_room(self):
+        response = self.query(
+            '''
+            query rooms($search: String){
+              rooms (search: $search){
+                id
+                name
+                description
+              }
+            }
+            ''',
+            op_name='rooms',
+            variables={'search': 'Anime'}
+        )
+
+        content = json.loads(response.content)
+
+        self.assertEqual(1, len(content['data']['rooms']))
+        self.assertEqual(response.status_code, 200)
+        self.assertResponseNoErrors(response)
