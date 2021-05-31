@@ -50,7 +50,6 @@ const ChatWindow = ({ classes }) => {
                                      if (loading) return <Loading />
                                      if (error) return <Error error={error} />
 
-                                     // Validate if there's a search to update the Chat list
                                      const messages = data.messages
                                      return <ChatMessageHistory messages={messages} />
                                  }}
@@ -81,6 +80,9 @@ export const GET_MESSAGES_QUERY = gql`
     query($room: Int) {
         messages(room: $room) {
             id
+            message
+            command
+            timeSend
             room {
               id
               name
@@ -89,8 +91,6 @@ export const GET_MESSAGES_QUERY = gql`
               id
               username
             }
-            message
-            command
         }
     }
 `
