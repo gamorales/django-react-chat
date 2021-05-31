@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Query } from "react-apollo"
 import { gql } from "apollo-boost"
 
@@ -34,6 +34,13 @@ const ChatWindow = ({ classes }) => {
         //this.setState({ messages: nextMessages, inputText: nextInputText });
     }
 
+    const scrollToTop = () => {
+        document.querySelector('#maincard').scrollTo({
+            top:  document.querySelector('#maincard').scrollHeight,
+            behavior: "smooth"
+        })
+    };
+
     return (
          <div className="container-fluid h-100">
              <Card>
@@ -43,8 +50,8 @@ const ChatWindow = ({ classes }) => {
              </Card>
              <div className="row justify-content-center h-100">
                  <div className={`col-md-11 ${classes.marginCard}`}>
-                     <div className={classes.card} >
-                         <div className={`card-body ${classes.messages}`}>
+                     <div className={classes.card}>
+                         <div className={`card-body ${classes.messages}`} id="maincard">
                              <Query query={GET_MESSAGES_QUERY} variables={{room: roomId}}>
                                  {({ data, loading, error}) => {
                                      if (loading) return <Loading />
