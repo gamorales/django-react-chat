@@ -1,4 +1,5 @@
 import json
+from concurrent.futures.thread import ThreadPoolExecutor
 
 from django.contrib.auth.models import User
 from channels.generic.websocket import AsyncWebsocketConsumer
@@ -6,6 +7,7 @@ from channels.db import database_sync_to_async
 from django.utils import timezone, dateformat
 
 from .models import Message
+from graphqlprj.utils import decoupled
 
 
 class ChatConsumer(AsyncWebsocketConsumer):
@@ -41,6 +43,13 @@ class ChatConsumer(AsyncWebsocketConsumer):
     # Receive message from room group
     async def chat_message(self, event):
         message = event["message"]
+
+        # Checks if message contains the command '/stock=
+        if "/stock=" in message:
+            stock = message.split("/stock=")
+            with ThreadPoolExecutor() as executor:
+                future = executor.submit(decoupled, stock[1])
+                message = future.result()
 
         # Send message to WebSocket
         data_dict = {
