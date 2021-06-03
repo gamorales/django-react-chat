@@ -12,36 +12,10 @@ class UserType(DjangoObjectType):
         only_fields = ("id", "username", "email", "password", "date_joined")
 
 
-class Person(ObjectType):
-    first_name = String()
-    last_name = String()
-    full_name = String()
-
-    def resolve_first_name(parent, info):
-        return Person.first_name
-
-    def resolve_last_name(parent, info):
-        return Person.last_name
-
-    def resolve_full_name(parent, info):
-        return f"{Person.first_name} {Person.last_name}"
-
-
 class Query(graphene.ObjectType):
     me = graphene.Field(UserType)
     user = graphene.Field(UserType, user_id=graphene.Int(required=True))
     users = graphene.List(UserType)
-
-    hola = graphene.String()
-    hola_nombre = graphene.String(nombre=graphene.String(default_value="stranger"))
-    person = graphene.Field(
-        Person, first_name=String(required=True), last_name=String(required=True)
-    )
-
-    def resolve_person(self, info, first_name, last_name):
-        Person.first_name = first_name
-        Person.last_name = last_name
-        return Person
 
     def resolve_users(self, info):
         """
