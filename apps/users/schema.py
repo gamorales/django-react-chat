@@ -27,16 +27,6 @@ class Person(ObjectType):
         return f"{Person.first_name} {Person.last_name}"
 
 
-class PersonB(ObjectType):
-    first_name = String()
-    last_name = String()
-
-
-class PersonInput(graphene.InputObjectType):
-    first_name = String(required=True)
-    last_name = String(required=True)
-
-
 class Query(graphene.ObjectType):
     me = graphene.Field(UserType)
     user = graphene.Field(UserType, user_id=graphene.Int(required=True))
@@ -47,18 +37,11 @@ class Query(graphene.ObjectType):
     person = graphene.Field(
         Person, first_name=String(required=True), last_name=String(required=True)
     )
-    b_person = graphene.Field(PersonB)
 
     def resolve_person(self, info, first_name, last_name):
         Person.first_name = first_name
         Person.last_name = last_name
         return Person
-
-    def resolve_hola(self, info):
-        return "Hola mundo"
-
-    def resolve_hola_nombre(self, info, nombre):
-        return f"Hola {nombre}"
 
     def resolve_users(self, info):
         """
@@ -138,19 +121,5 @@ class CreateUser(graphene.Mutation):
         return CreateUser(user=user)
 
 
-class CreatePerson(graphene.Mutation):
-    class Arguments:
-        person_data = PersonInput(required=True)
-
-    person = graphene.Field(PersonB)
-
-    def mutate(root, info, person_data=None):
-        person = PersonB(
-            first_name=person_data.first_name, last_name=person_data.last_name
-        )
-        return CreatePerson(person=person)
-
-
 class Mutation(graphene.ObjectType):
     create_user = CreateUser.Field()
-    create_person = CreatePerson.Field()
